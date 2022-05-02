@@ -12,7 +12,6 @@ public class MatchDto {
 	private String teamB;
 	private String sport;
 	
-	
 	public String getDescription() {
 		return description;
 	}

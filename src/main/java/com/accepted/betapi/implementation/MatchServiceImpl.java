@@ -28,14 +28,14 @@ public class MatchServiceImpl implements MatchService {
 
 	@Override
 	public List<MatchDto> getAll() {
-		List<MatchDto> matchesList = new ArrayList<>();
+		List<MatchDto> matchesDtoList = new ArrayList<>();
 		Iterable<Match> matches = matchRepository.findAll();
 		
 		for (Match match : matches) {
-			matchesList.add(matchTransformer.transform(match));
+			matchesDtoList.add(matchTransformer.transform(match));
 		}
 		
-		return matchesList;
+		return matchesDtoList;
 	}
 
 	@Override

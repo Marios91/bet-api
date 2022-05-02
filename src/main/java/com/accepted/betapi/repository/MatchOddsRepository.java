@@ -11,7 +11,7 @@ import com.accepted.betapi.domain.MatchOdds;
 
 public interface MatchOddsRepository extends CrudRepository<MatchOdds, Integer> {
 	
-	List<MatchOdds> findByMatchId(Match match);
+	List<MatchOdds> findByMatch(Match match);
 	
 	@Transactional
 	void deleteByMatchId(Match match);
