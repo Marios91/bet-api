@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+
 @Entity
 @Table(name = "MatchOdds")
 public class MatchOdds {
@@ -21,12 +22,15 @@ public class MatchOdds {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "match_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Match match;
+	
 	@Column(name = "specifier", nullable = false, columnDefinition = "char(1)")
 	private char specifier;
+	
 	@Column(name = "odd")
 	private float odd;
 

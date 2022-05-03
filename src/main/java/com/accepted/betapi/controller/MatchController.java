@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accepted.betapi.domain.Match;
+import com.accepted.betapi.domain.MatchOdds;
 import com.accepted.betapi.dto.MatchDto;
+import com.accepted.betapi.dto.MatchOddsDto;
+import com.accepted.betapi.service.MatchOddsService;
 import com.accepted.betapi.service.MatchService;
 
 @RestController
@@ -21,21 +24,33 @@ import com.accepted.betapi.service.MatchService;
 public class MatchController {
 
 	private final MatchService matchService;
+	private final MatchOddsService matchOddsService;
 
 	@Autowired
-	public MatchController(MatchService matchService) {
+	public MatchController(MatchService matchService, MatchOddsService matchOddsService) {
 		super();
 		this.matchService = matchService;
+		this.matchOddsService = matchOddsService;
 	}
 
 	@GetMapping("/all")
 	public List<MatchDto> getAllMatches() {
 		return matchService.getAll();
 	}
+	
+	@GetMapping("/{matchId}/odds")
+	public List<MatchOddsDto> getAllMatchOddsByMatchId(@PathVariable("matchId") int matchId) {
+		return matchOddsService.getAll(matchId);
+	}
 
 	@GetMapping("/one/{id}")
 	public MatchDto getMatchById(@PathVariable("id") int id) {
 		return matchService.getMatch(id);
+	}
+	
+	@GetMapping("/odds/{id}")
+	public MatchOddsDto getMatchOddsByMatchId(@PathVariable("id") int id) {
+		return matchOddsService.getMatchOdds(id);
 	}
 
 	@PostMapping("/new")
@@ -43,19 +58,39 @@ public class MatchController {
 		return matchService.create(match);
 	}
 	
+	@PostMapping("/{matchId}/odds/new")
+	public MatchOddsDto createMatchOdds(@PathVariable("matchId") int matchId, @RequestBody MatchOdds matchOddRequest) {
+		return matchOddsService.create(matchId, matchOddRequest);
+	}
+	
 	@PutMapping("/update/{id}")
 	public MatchDto updateMatch(@PathVariable("id") int id, @RequestBody Match match) {
 		return matchService.update(id, match);
 	}
 	
-	@DeleteMapping("/all")
+	@PutMapping("/odds/update/{id}")
+	public MatchOddsDto updateMatchOdds(@PathVariable("id") int id, @RequestBody MatchOdds matchOddRequest) {
+		return matchOddsService.update(id, matchOddRequest);
+	}
+	
+	@DeleteMapping("/delete/all")
 	public void deleteAllMatches() {
 		matchService.deleteAll();
 	}
 	
-	@DeleteMapping("/one/{id}")
+	@DeleteMapping("/delete/{id}")
 	public void deleteMatch(@PathVariable("id") int id) {
 		matchService.delete(id);
+	}
+	
+	@DeleteMapping("/odds/delete/{id}")
+	public void deleteMatchOdds(@PathVariable("id") int id) {
+		matchOddsService.delete(id);
+	}
+	
+	@DeleteMapping("/{matchId}/odds/delete")
+	public void deleteAllMatchOddsFromMatch(@PathVariable("matchId") int matchId) {
+		matchOddsService.deleteMatchOdds(matchId);
 	}
 
 }

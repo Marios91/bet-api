@@ -14,6 +14,6 @@ public interface MatchOddsRepository extends CrudRepository<MatchOdds, Integer> 
 	List<MatchOdds> findByMatch(Match match);
 	
 	@Transactional
-	void deleteByMatchId(Match match);
+	void deleteByMatch(Match match);
 
 }
