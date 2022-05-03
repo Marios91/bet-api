@@ -75,10 +75,11 @@ public class MatchServiceImpl implements MatchService {
 
 	@Override
 	public void delete(int id) {
-		matchRepository.findById(id)
-		.orElseThrow(() -> new NoSuchElementException("Not found Match to delete with id = " + id));
+		Match match = matchRepository.findById(id)
+				.orElseThrow(() -> new NoSuchElementException("Not found Match with id = " + id));
 		
-		matchRepository.deleteById(id);
+		matchRepository.deleteById(match.getId());
+		
 	}
 
 }
