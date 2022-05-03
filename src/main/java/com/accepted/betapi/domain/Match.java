@@ -35,10 +35,10 @@ public class Match {
 	@Column(name = "match_time", nullable = false)
 	private LocalTime matchTime;
 	
-	@Column(name = "team_a")
+	@Column(name = "team_a", nullable = false)
 	private String teamA;
 	
-	@Column(name = "team_b")
+	@Column(name = "team_b", nullable = false)
 	private String teamB;
 	
 	@Column(name = "sport", nullable = false)

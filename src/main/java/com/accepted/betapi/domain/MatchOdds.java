@@ -31,7 +31,7 @@ public class MatchOdds {
 	@Column(name = "specifier", nullable = false, columnDefinition = "char(1)")
 	private char specifier;
 	
-	@Column(name = "odd")
+	@Column(name = "odd", nullable = false)
 	private float odd;
 
 	public Integer getId() {
