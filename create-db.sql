@@ -1,0 +1,3 @@
+CREATE DATABASE betdb
+OWNER postgres
+ENCODING 'utf-8';
